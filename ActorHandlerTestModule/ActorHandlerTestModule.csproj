@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="ActorModule">
+      <HintPath>..\..\source\DLL\ActorModule.dll</HintPath>
+    </Reference>
+    <Reference Include="CityDataExpansionModule">
+      <HintPath>..\..\1\master\PathsFindingCoreModule\bin\Debug\netcoreapp2.1\CityDataExpansionModule.dll</HintPath>
+    </Reference>
+    <Reference Include="OSMLSGlobalLibrary">
+      <HintPath>..\..\TestModule\OSMLSGlobalLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="PathsFindingCoreModule">
+      <HintPath>..\..\1\master\PathsFindingCoreModule\bin\Debug\netcoreapp2.1\PathsFindingCoreModule.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

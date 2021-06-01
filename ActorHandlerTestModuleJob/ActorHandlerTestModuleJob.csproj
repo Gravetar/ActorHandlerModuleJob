@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NetTopologySuite" Version="2.0.0" />
+    <PackageReference Include="NetTopologySuite.Features" Version="2.0.0" />
+    <PackageReference Include="NodaTime" Version="3.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ActorHandlerModuleJob\ActorHandlerModuleJob.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ActorModule">
+      <HintPath>..\..\ActorModule2\osmlsactormodule\DLL\ActorModule.dll</HintPath>
+    </Reference>
+    <Reference Include="CityDataExpansionModule">
+      <HintPath>..\..\1\master\PathsFindingCoreModule\bin\Debug\netcoreapp2.1\CityDataExpansionModule.dll</HintPath>
+    </Reference>
+    <Reference Include="NodaTime">
+      <HintPath>..\..\source\DLL\NodaTime.dll</HintPath>
+    </Reference>
+    <Reference Include="OSMLSGlobalLibrary">
+      <HintPath>..\..\TestModule\OSMLSGlobalLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="PathsFindingCoreModule">
+      <HintPath>..\..\1\master\PathsFindingCoreModule\bin\Debug\netcoreapp2.1\PathsFindingCoreModule.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
