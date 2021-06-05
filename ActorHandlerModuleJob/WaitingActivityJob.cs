@@ -12,27 +12,33 @@ namespace ActorHandlerModuleJob
         public int Priority { get; set; } = 1;
         //Интервал времени на работу
         public TimeInterval JobTime { get; set; }
+        double workseconds;
 
-        public WaitingActivityJob(Actor actor, int priority, TimeInterval jobtime)
+        public WaitingActivityJob(double _workseconds, int priority, TimeInterval jobtime)
         {
             Priority = priority;
             JobTime = jobtime;
+            workseconds = _workseconds;
         }
         //Update-работает постоянно, пока не return true
         public bool Update(Actor actor, double deltaTime)
         {
+            workseconds += deltaTime;
             // Уменьшаем статы акторы
-                //Проверка здоровья
-            if (actor.GetState<SpecState>().Health <= 0.1) actor.GetState<SpecState>().Health = 0;
-            //Голод
-            if (actor.GetState<SpecState>().Hunger <= 0.1) actor.GetState<SpecState>().Health -= 0.01;
-            else actor.GetState<SpecState>().Hunger -= 0.01;
-            //Усталость
-            if (actor.GetState<SpecState>().Fatigue <= 0.1) actor.GetState<SpecState>().Health -= 0.01;
-            else actor.GetState<SpecState>().Fatigue -= 0.01;
-            //Настроение(Падает медленее, чем другие)
-            if (actor.GetState<SpecState>().Mood <= 0.1) actor.GetState<SpecState>().Health -= 0.001;
-            else actor.GetState<SpecState>().Mood -= 0.001;
+            //Проверка здоровья
+            if (workseconds >= 1)
+            {
+                workseconds -= 1;
+                //Голод
+                if (actor.GetState<SpecState>().Hunger <= 0.1) actor.GetState<SpecState>().Hunger = 0;
+                else actor.GetState<SpecState>().Hunger -= 0.01 * 100;
+                //Усталость
+                if (actor.GetState<SpecState>().Fatigue <= 0.1) actor.GetState<SpecState>().Fatigue = 0;
+                else actor.GetState<SpecState>().Fatigue -= 0.01 * 100;
+                //Настроение(Падает медленее, чем другие)
+                if (actor.GetState<SpecState>().Mood <= 0.1) actor.GetState<SpecState>().Mood = 0;
+                else actor.GetState<SpecState>().Mood -= 0.001 * 100;
+            }
 #if DEBUG
             Console.WriteLine($"Health: {actor.GetState<SpecState>().Health}; Hunger: {actor.GetState<SpecState>().Hunger}; Fatigue: {actor.GetState<SpecState>().Fatigue}; Mood: {actor.GetState<SpecState>().Mood}");
 #endif

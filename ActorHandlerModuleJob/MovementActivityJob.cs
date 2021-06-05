@@ -16,6 +16,7 @@ namespace ActorHandlerModuleJob
         public int i = 0;
         //Флаг-путь построен.
         public bool IsPath = true;
+        double workseconds = 0;
 
         // Приоритет делаем авто-свойством, со значением по умолчанию
         // Вообще он дожен был быть полем, но интерфейсы не дают объявлять поля, так что...
@@ -31,22 +32,24 @@ namespace ActorHandlerModuleJob
         // Здесь происходит работа с актором
         public bool Update(Actor actor, double deltaTime)
         {
-
+            workseconds += deltaTime;
             // Расстояние, которое может пройти актор с заданной скоростью за прошедшее время
             double distance = actor.GetState<SpecState>().Speed * deltaTime;
 
             //Уменьшаем статы акторы
-                //Проверка здоровья
-            if (actor.GetState<SpecState>().Health <= 0.1) actor.GetState<SpecState>().Health = 0;
+            if (workseconds >= 1)
+            {
+                workseconds -= 1;
                 //Голод
-            if (actor.GetState<SpecState>().Hunger <= 0.1) actor.GetState<SpecState>().Health -= 0.001;
-            else actor.GetState<SpecState>().Hunger -= 0.001;
+                if (actor.GetState<SpecState>().Hunger <= 0.1) actor.GetState<SpecState>().Hunger = 0;
+                else actor.GetState<SpecState>().Hunger -= 0.001 * 100;
                 //Усталость
-            if (actor.GetState<SpecState>().Fatigue <= 0.1) actor.GetState<SpecState>().Health -= 0.001;
-            else actor.GetState<SpecState>().Fatigue -= 0.001;
+                if (actor.GetState<SpecState>().Fatigue <= 0.1) actor.GetState<SpecState>().Hunger = 0;
+                else actor.GetState<SpecState>().Fatigue -= 0.001 * 100;
                 //Настроение(Падает медленее, чем другие)
-            if (actor.GetState<SpecState>().Mood <= 0.1) actor.GetState<SpecState>().Health -= 0.001;
-            else actor.GetState<SpecState>().Mood -= 0.0001;
+                if (actor.GetState<SpecState>().Mood <= 0.1) actor.GetState<SpecState>().Hunger = 0;
+                else actor.GetState<SpecState>().Mood -= 0.0001 * 100;
+            }
 #if DEBUG
             Console.WriteLine($"Health: {actor.GetState<SpecState>().Health}; Hunger: {actor.GetState<SpecState>().Hunger}; Fatigue: {actor.GetState<SpecState>().Fatigue}; Mood: {actor.GetState<SpecState>().Mood}");
 #endif
@@ -95,7 +98,7 @@ namespace ActorHandlerModuleJob
                 i = 0;
                 IsPath = true;
                 //Запуск активити ожидания(имитация нахождения на работе)
-                actor.Activity = new WaitingActivityJob(actor, Priority, JobTime);
+                actor.Activity = new WaitingActivityJob(workseconds, Priority, JobTime);
             }
             return false;
         }
