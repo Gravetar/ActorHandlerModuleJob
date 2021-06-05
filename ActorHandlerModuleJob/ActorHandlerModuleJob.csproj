@@ -18,7 +18,7 @@
       <HintPath>..\..\1\master\PathsFindingCoreModule\bin\Debug\netcoreapp2.1\CityDataExpansionModule.dll</HintPath>
     </Reference>
     <Reference Include="InitializeActorModule">
-      <HintPath>bin\Debug\netcoreapp3.1\InitializeActorModule.dll</HintPath>
+      <HintPath>..\..\ActorHandlerModuleJob\ActorHandlerModuleJob\bin\source\InitializeActorModule\bin\release\netcoreapp3.1\InitializeActorModule.dll</HintPath>
     </Reference>
     <Reference Include="NodaTime">
       <HintPath>..\..\ActorModule2\osmlsactormodule\DLL\NodaTime.dll</HintPath>
