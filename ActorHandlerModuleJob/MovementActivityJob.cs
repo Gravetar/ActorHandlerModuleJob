@@ -41,17 +41,17 @@ namespace ActorHandlerModuleJob
             {
                 workseconds -= 1;
                 //Голод
-                if (actor.GetState<SpecState>().Hunger <= 0.1) actor.GetState<SpecState>().Hunger = 0;
-                else actor.GetState<SpecState>().Hunger -= 0.001 * 100;
+                if (actor.GetState<SpecState>().Satiety <= 0.1) actor.GetState<SpecState>().Satiety = 0;
+                else actor.GetState<SpecState>().Satiety -= 0.001 * 100;
                 //Усталость
-                if (actor.GetState<SpecState>().Fatigue <= 0.1) actor.GetState<SpecState>().Hunger = 0;
-                else actor.GetState<SpecState>().Fatigue -= 0.001 * 100;
+                if (actor.GetState<SpecState>().Stamina <= 0.1) actor.GetState<SpecState>().Stamina = 0;
+                else actor.GetState<SpecState>().Stamina -= 0.001 * 100;
                 //Настроение(Падает медленее, чем другие)
-                if (actor.GetState<SpecState>().Mood <= 0.1) actor.GetState<SpecState>().Hunger = 0;
+                if (actor.GetState<SpecState>().Mood <= 0.1) actor.GetState<SpecState>().Satiety = 0;
                 else actor.GetState<SpecState>().Mood -= 0.0001 * 100;
             }
 #if DEBUG
-            Console.WriteLine($"Health: {actor.GetState<SpecState>().Health}; Hunger: {actor.GetState<SpecState>().Hunger}; Fatigue: {actor.GetState<SpecState>().Fatigue}; Mood: {actor.GetState<SpecState>().Mood}");
+           // Console.WriteLine($"Health: {actor.GetState<SpecState>().Health}; Hunger: {actor.GetState<SpecState>().Hunger}; Fatigue: {actor.GetState<SpecState>().Fatigue}; Mood: {actor.GetState<SpecState>().Mood}");
 #endif
 
             //Если путь еще не построен
