@@ -61,9 +61,8 @@ namespace ActorHandlerModuleJob
                 bool isMovementActivityJob = actor.Activity is MovementActivityJob;
                 bool isWaitingActivityJob = actor.Activity is WaitingActivityJob;
 
-#if DEBUG
                 Console.WriteLine($"Flags: IsActivity={isActivity} IsActivityMovement={isMovementActivityJob} IsActivityWaiting={isWaitingActivityJob}");
-#endif
+
                 //Если активность не установлена или приоритет Активностей работы выше, чем у текущей
                 if ((!isActivity) || (!isMovementActivityJob && !isWaitingActivityJob && newPriority > actor.Activity.Priority))
                 {

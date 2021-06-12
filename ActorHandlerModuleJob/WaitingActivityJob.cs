@@ -39,9 +39,8 @@ namespace ActorHandlerModuleJob
                 if (actor.GetState<SpecState>().Mood <= 0.1) actor.GetState<SpecState>().Mood = 0;
                 else actor.GetState<SpecState>().Mood -= 0.001 * 100;
             }
-#if DEBUG
-           // Console.WriteLine($"Health: {actor.GetState<SpecState>().Health}; Hunger: {actor.GetState<SpecState>().Hunger}; Fatigue: {actor.GetState<SpecState>().Fatigue}; Mood: {actor.GetState<SpecState>().Mood}");
-#endif
+        Console.WriteLine($"Health: {actor.GetState<SpecState>().Health}; Hunger: {actor.GetState<SpecState>().Satiety}; Fatigue: {actor.GetState<SpecState>().Stamina}; Mood: {actor.GetState<SpecState>().Mood}");
+
 
             //Текущее время, переведенное в строку
             string NowTime = DateTime.Now.ToString("HH:mm:ss");
