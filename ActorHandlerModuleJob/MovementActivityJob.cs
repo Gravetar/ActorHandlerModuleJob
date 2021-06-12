@@ -51,7 +51,7 @@ namespace ActorHandlerModuleJob
                 if (actor.GetState<SpecState>().Mood <= 0.1) actor.GetState<SpecState>().Satiety = 0;
                 else actor.GetState<SpecState>().Mood -= 0.0001 * 100;
             }
-           Console.WriteLine($"Health: {actor.GetState<SpecState>().Health}; Hunger: {actor.GetState<SpecState>().Satiety}; Fatigue: {actor.GetState<SpecState>().Stamina}; Mood: {actor.GetState<SpecState>().Mood}");
+           // Console.WriteLine($"Health: {actor.GetState<SpecState>().Health}; Hunger: {actor.GetState<SpecState>().Satiety}; Fatigue: {actor.GetState<SpecState>().Stamina}; Mood: {actor.GetState<SpecState>().Mood}");
 
             //Если путь еще не построен
             if (IsPath)
