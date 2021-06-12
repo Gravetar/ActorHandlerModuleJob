@@ -17,6 +17,7 @@ namespace ActorHandlerModuleJob
         //Флаг-путь построен.
         public bool IsPath = true;
         double workseconds = 0;
+        bool End = true;
 
         // Приоритет делаем авто-свойством, со значением по умолчанию
         // Вообще он дожен был быть полем, но интерфейсы не дают объявлять поля, так что...
@@ -59,7 +60,11 @@ namespace ActorHandlerModuleJob
                 var firstCoordinate = new Coordinate(actor.X, actor.Y);
                 var secondCoordinate = new Coordinate(actor.GetState<JobState>().Job.X, actor.GetState<JobState>().Job.Y);
                 //Строим путь
+                if(!PathsFinding.GetPath(firstCoordinate, secondCoordinate, "Walking").IsCompleted && !End)
+                    return false;
+                End = false;
                 Path = PathsFinding.GetPath(firstCoordinate, secondCoordinate, "Walking").Result.Coordinates;
+                End = true;
                 IsPath = false;
             }
 
