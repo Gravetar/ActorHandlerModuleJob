@@ -29,30 +29,20 @@ namespace ActorHandlerModuleJob
             {
                 //Установка приоритета
                 int newPriority = 0;
-                //Интервалы времени работы
-                TimeInterval Interval1 = actor.GetState<JobState>().JobTimes[0];
-                TimeInterval Interval2 = actor.GetState<JobState>().JobTimes[1];
 
-                //Для проверки нужно ли идти на работу
-                var zonedClock = SystemClock.Instance.InTzdbSystemDefaultZone();
-                //Если время работать по первому интервалу или время работать по второму интервалу
-                if (zonedClock.GetCurrentTimeOfDay() > Interval1.Start && zonedClock.GetCurrentTimeOfDay() < Interval1.End || zonedClock.GetCurrentTimeOfDay() > Interval2.Start && zonedClock.GetCurrentTimeOfDay() < Interval2.End)
+                foreach (TimeInterval item in actor.GetState<JobState>().JobTimes)
                 {
-                    newPriority = 75;
-                    if (zonedClock.GetCurrentTimeOfDay() > Interval1.Start && zonedClock.GetCurrentTimeOfDay() < Interval1.End)
+                    if (item.Ongoing)
                     {
-                        JobTimeStart = Interval1.Start;
-                        JobTimeEnd = Interval1.End;
+                        newPriority = 75;
+                        JobTimeStart = item.Start;
+                        JobTimeEnd = item.End;
+                        break;
                     }
                     else
                     {
-                        JobTimeStart = Interval2.Start;
-                        JobTimeEnd = Interval2.End;
+                        newPriority = 0;
                     }
-                }
-                else
-                {
-                    newPriority = 0;
                 }
 
                 //установлена ли уже активность у актора
