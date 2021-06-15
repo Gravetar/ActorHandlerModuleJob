@@ -44,9 +44,6 @@ namespace ActorHandlerModuleJob
                         newPriority = 0;
                     }
                 }
-
-                //установлена ли уже активность у актора
-                bool isActivity = actor.Activity != null;
                 //Является ли активность нашей
                 bool isMovementActivityJob = actor.Activity is MovementActivityJob;
                 bool isWaitingActivityJob = actor.Activity is WaitingActivityJob;
