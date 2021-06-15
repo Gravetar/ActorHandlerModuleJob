@@ -53,14 +53,12 @@ namespace ActorHandlerModuleJob
 
                // Console.WriteLine($"Flags: IsActivity={isActivity} IsActivityMovement={isMovementActivityJob} IsActivityWaiting={isWaitingActivityJob}");
 
-                if (isActivity)
-                    //Если активность не установлена или приоритет Активностей работы выше, чем у текущей
-                    if ((!isMovementActivityJob && !isWaitingActivityJob && newPriority > actor.Activity.Priority) && newPriority > 0)
-                    {
-                        // Назначить актору путь до работы
-                        actor.Activity = new MovementActivityJob(newPriority, new TimeInterval(JobTimeStart, JobTimeEnd));
-                        Console.WriteLine("Said actor go work\n");
-                    }
+                //Если активность не установлена или приоритет Активностей работы выше, чем у текущей
+                if ((!isMovementActivityJob && !isWaitingActivityJob && newPriority > (actor.Activity?.Priority ?? 0)) && newPriority > 0)
+                {
+                    // Назначить актору путь до работы
+                    actor.Activity = new MovementActivityJob(newPriority, new TimeInterval(JobTimeStart, JobTimeEnd));
+                    Console.WriteLine("Said actor go work\n");
                 }
             }
         }
